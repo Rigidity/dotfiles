@@ -79,11 +79,8 @@ if ! shopt -oq posix; then
 fi
 . "$HOME/.cargo/env"
 
-# Env
-export CARGO_NET_GIT_FETCH_WITH_CLI=true
-export CHIA_ROOT=/home/rigidity/.chia/simulator/main
-export BUN_INSTALL="$HOME/.bun"
-
 # Paths
-export PATH=$PATH:$BUN_INSTALL/bin
 export PATH=$PATH:/home/rigidity/.local/bin
+
+export DRPLOTTER_CLIENT_TOKEN='9IMcVTVcR6GyuhjkwuuOFt1QqjQAQqho401j8N1mmG6QDben'
+setxkbmap -option ctrl:nocaps

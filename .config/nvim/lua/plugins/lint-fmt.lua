@@ -1,3 +1,4 @@
+-- Sets up linting and formatting for various languages.
 return {
   "nvimtools/none-ls.nvim",
   config = function()
@@ -25,6 +26,7 @@ return {
       },
     })
 
+    -- Formats a document manually.
     vim.keymap.set("n", "<leader>gf", vim.lsp.buf.format)
 
     local _augroups = {}
@@ -41,9 +43,11 @@ return {
     vim.api.nvim_create_autocmd("LspAttach", {
       group = vim.api.nvim_create_augroup("lsp-attach-format", { clear = true }),
       callback = function(args)
-        local client_id = args.data.client_id
-        local client = vim.lsp.get_client_by_id(client_id)
-        local bufnr = args.buf
+        local client = vim.lsp.get_client_by_id(args.data.client_id)
+
+        if not client then
+          error("Client not found.", 1)
+        end
 
         if client.name == "tsserver" then
           return
@@ -55,7 +59,7 @@ return {
 
         vim.api.nvim_create_autocmd("BufWritePre", {
           group = get_augroup(client),
-          buffer = bufnr,
+          buffer = args.buf,
           callback = function()
             vim.lsp.buf.format({
               async = false,
@@ -64,7 +68,8 @@ return {
                 return c.id == client.id
               end,
             })
-            -- vim.diagnostic.enable(bufnr)
+            -- This adds diagnostics after formatting.
+            vim.diagnostic.enable(args.buf)
           end,
         })
       end,

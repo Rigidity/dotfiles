@@ -20,6 +20,10 @@ style = "Regular"
 [window]
 resize_increments = true
 
+[window.dimensions]
+lines = 20
+columns = 80
+
 # Colors (One Dark)
 
 # Default colors

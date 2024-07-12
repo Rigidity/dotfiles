@@ -12,7 +12,7 @@
         "napi-derive": ["napi"]
       },
       "rust-analyzer.cargo.features": "all",
-      "rust-analyzer.check.allTargets": false
+      "rust-analyzer.check.allTargets": true
     }
   }
 }
